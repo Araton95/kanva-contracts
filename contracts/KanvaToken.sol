@@ -1698,8 +1698,6 @@ contract KanvaToken is ERC20Capped, ERC20Burnable, ERC1363, Roles, TokenRecover 
     // indicates if transfer is enabled
     bool private _transferEnabled = false;
 
-    string public constant BUILT_ON = "https://vittominacori.github.io/erc20-generator";
-
     /**
      * @dev Emitted during finish minting
      */
