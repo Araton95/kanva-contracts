@@ -1690,7 +1690,7 @@ contract Roles is AccessControl {
  * @author Vittorio Minacori (https://github.com/vittominacori)
  * @dev Implementation of the BaseToken
  */
-contract BaseToken is ERC20Capped, ERC20Burnable, ERC1363, Roles, TokenRecover {
+contract KanvaToken is ERC20Capped, ERC20Burnable, ERC1363, Roles, TokenRecover {
 
     // indicates if minting is finished
     bool private _mintingFinished = false;
