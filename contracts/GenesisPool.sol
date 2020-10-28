@@ -1,9 +1,4 @@
-/**
- *Submitted for verification at Etherscan.io on 2020-08-26
-*/
-
-pragma solidity ^0.5.0;
-
+pragma solidity ^0.6.2;
 
 /**
  * @dev Standard math utilities missing in the Solidity language.
@@ -1289,12 +1284,12 @@ contract ERC1155Tradable is ERC1155, ERC1155MintBurn, ERC1155Metadata, Ownable, 
 	}
 }
 
-contract MemeTokenWrapper {
+contract KanvaTokenWrapper {
 	using SafeMath for uint256;
-	IERC20 public meme;
+	IERC20 public kanva;
 
-	constructor(IERC20 _memeAddress) public {
-		meme = IERC20(_memeAddress);
+	constructor(IERC20 _kanvaAddress) public {
+		kanva = IERC20(_kanvaAddress);
 	}
 
 	uint256 private _totalSupply;
@@ -1311,18 +1306,18 @@ contract MemeTokenWrapper {
 	function stake(uint256 amount) public {
 		_totalSupply = _totalSupply.add(amount);
 		_balances[msg.sender] = _balances[msg.sender].add(amount);
-		meme.transferFrom(msg.sender, address(this), amount);
+		kanva.transferFrom(msg.sender, address(this), amount);
 	}
 
 	function withdraw(uint256 amount) public {
 		_totalSupply = _totalSupply.sub(amount);
 		_balances[msg.sender] = _balances[msg.sender].sub(amount);
-		meme.transfer(msg.sender, amount);
+		kanva.transfer(msg.sender, amount);
 	}
 }
 
-contract GenesisPool is MemeTokenWrapper, Ownable {
-	ERC1155Tradable public memes;
+contract GenesisPool is KanvaTokenWrapper, Ownable {
+	ERC1155Tradable public kanvas;
 
 	mapping(address => uint256) public lastUpdateTime;
 	mapping(address => uint256) public points;
@@ -1341,8 +1336,8 @@ contract GenesisPool is MemeTokenWrapper, Ownable {
 		_;
 	}
 
-	constructor(ERC1155Tradable _memesAddress, IERC20 _memeAddress) public MemeTokenWrapper(_memeAddress) {
-		memes = _memesAddress;
+	constructor(ERC1155Tradable _kanvasAddress, IERC20 _kanvaAddress) public KanvaTokenWrapper(_kanvaAddress) {
+		kanvas = _kanvasAddress;
 	}
 
 	function addCard(uint256 cardId, uint256 amount) public onlyOwner {
@@ -1358,9 +1353,9 @@ contract GenesisPool is MemeTokenWrapper, Ownable {
 			);
 	}
 
-	// stake visibility is public as overriding MemeTokenWrapper's stake() function
+	// stake visibility is public as overriding KanvaTokenWrapper's stake() function
 	function stake(uint256 amount) public updateReward(msg.sender) {
-		require(amount.add(balanceOf(msg.sender)) <= 500000000, "Cannot stake more than 5 meme");
+		require(amount.add(balanceOf(msg.sender)) <= 500000000, "Cannot stake more than 5 kanva");
 
 		super.stake(amount);
 		emit Staked(msg.sender, amount);
@@ -1380,10 +1375,10 @@ contract GenesisPool is MemeTokenWrapper, Ownable {
 	function redeem(uint256 card) public updateReward(msg.sender) {
 		require(cards[card] != 0, "Card not found");
 		require(points[msg.sender] >= cards[card], "Not enough points to redeem for card");
-		require(memes.totalSupply(card) < memes.maxSupply(card), "Max cards minted");
+		require(kanvas.totalSupply(card) < kanvas.maxSupply(card), "Max cards minted");
 
 		points[msg.sender] = points[msg.sender].sub(cards[card]);
-		memes.mint(msg.sender, card, 1, "");
+		kanvas.mint(msg.sender, card, 1, "");
 		emit Redeemed(msg.sender, cards[card]);
 	}
 }

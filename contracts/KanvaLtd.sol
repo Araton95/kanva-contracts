@@ -2,7 +2,7 @@
  *Submitted for verification at Etherscan.io on 2020-08-26
 */
 
-pragma solidity >=0.5.0;
+pragma solidity ^0.6.2;
 
 
 /*
@@ -1187,15 +1187,15 @@ contract ERC1155Tradable is ERC1155, ERC1155MintBurn, ERC1155Metadata, Ownable, 
 }
 
 /**
- * @title MemeLtd
- * MemeLtd - Collect limited edition NFTs from Meme Ltd
+ * @title KanvaLtd
+ * KanvaLtd - Collect limited edition NFTs from Kanva Ltd
  */
-contract MemeLtd is ERC1155Tradable {
-	constructor(address _proxyRegistryAddress) public ERC1155Tradable("Meme Ltd.", "MEMES", _proxyRegistryAddress) {
-		_setBaseMetadataURI("https://api.dontbuymeme.com/memes/");
+contract KanvaLtd is ERC1155Tradable {
+	constructor(address _proxyRegistryAddress) public ERC1155Tradable("Kanva Ltd.", "MEMES", _proxyRegistryAddress) {
+		_setBaseMetadataURI("https://api.dontbuykanva.com/kanvas/");
 	}
 
 	function contractURI() public view returns (string memory) {
-		return "https://api.dontbuymeme.com/contract/memes-erc1155";
+		return "https://api.dontbuykanva.com/contract/kanvas-erc1155";
 	}
 }
