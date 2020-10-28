@@ -43,7 +43,7 @@
   },
   "homepage": "https://github.com/Araton95/kanva-contracts#readme",
   "dependencies": {
-    "@openzeppelin/contracts": "^3.1.0",
+    "@openzeppelin/contracts": "^2.5.0",
     "@openzeppelin/test-environment": "^0.1.4",
     "@openzeppelin/test-helpers": "^0.5.6",
     "@truffle/hdwallet-provider": "^1.0.43",
