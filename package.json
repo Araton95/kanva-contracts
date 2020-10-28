@@ -16,7 +16,7 @@
     "deploy:ropsten": "truffle deploy --network ropsten --reset",
     "deploy:rinkeby": "truffle deploy --network rinkeby --reset",
     "deploy:kovan": "truffle deploy --network kovan --reset",
-    "flat": "truffle-flattener contracts/GenesisPool.sol > flat/GenesisPool.sol && contracts/KanvaToken.sol > flat/KanvaToken.sol && contracts/KanvaLtd.sol > flat/KanvaToken.sol"
+    "flat": "truffle-flattener contracts/GenesisPool.sol > flat/GenesisPool.sol && truffle-flattener contracts/KanvaToken.sol > flat/KanvaToken.sol && truffle-flattener contracts/KanvaLtd.sol > flat/KanvaLtd.sol"
   },
   "repository": {
     "type": "git",
