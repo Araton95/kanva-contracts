@@ -1,7 +1,5 @@
 pragma solidity ^0.5.12;
 
-import { Ownable } from "@openzeppelin/contracts/ownership/Ownable.sol";
-import { MinterRole } from "@openzeppelin/contracts/access/roles/MinterRole.sol";
 import { WhitelistAdminRole } from "@openzeppelin/contracts/access/roles/WhitelistAdminRole.sol";
 import { ERC1155Tradable } from "./ERC1155Tradable.sol";
 
