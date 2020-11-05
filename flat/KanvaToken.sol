@@ -583,7 +583,7 @@ contract ERC20Burnable is Context, ERC20 {
     }
 }
 
-// File: contracts/KanvaToken.sol
+// File: contracts/kanva/KanvaToken.sol
 
 pragma solidity ^0.5.12;
 

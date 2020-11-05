@@ -474,7 +474,7 @@ contract MinterRole is Context {
     }
 }
 
-// File: contracts/ERC1155Tradable.sol
+// File: contracts/kanva/ERC1155Tradable.sol
 
 pragma solidity ^0.5.12;
 
@@ -1355,7 +1355,7 @@ contract ERC1155Tradable is ERC1155, ERC1155MintBurn, ERC1155Metadata, Ownable, 
 	}
 }
 
-// File: contracts/KanvaLtd.sol
+// File: contracts/kanva/KanvaLtd.sol
 
 pragma solidity ^0.5.12;
 

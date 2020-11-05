@@ -1,7 +1,6 @@
 pragma solidity ^0.5.12;
 
-
-interface IKanva {
+interface IKanvaToken {
   function totalSupply() external view returns (uint256);
   function balanceOf(address account) external view returns (uint256);
   function transfer(address recipient, uint256 amount) external returns (bool);
