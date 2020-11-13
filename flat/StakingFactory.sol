@@ -803,6 +803,7 @@ contract PaletteRewards is StakingRewards, Ownable {
 
 	mapping(uint256 => uint256) public cards;
 	mapping(address => uint256) public pallettes;
+  mapping(address => uint256) public stakedBalance;
 	mapping(address => uint256) public palletteLastUpdateTime;
 
 	event CardAdded(uint256 card, uint256 points);
@@ -843,15 +844,24 @@ contract PaletteRewards is StakingRewards, Ownable {
 	}
 
 	function stake(uint256 amount) public updatePalletteReward(msg.sender) {
-    require(amount >= MIN_STAKE, "stake: Cannot stake less than provided min amount!");
-		require(amount.add(_balances[msg.sender]) <= MAX_STAKE, "stake: Cannot stake more than provided max amount!");
+    // Stake for PLTE reward
+    if (amount >= MIN_STAKE && amount.add(stakedBalance[msg.sender]) <= MAX_STAKE) {
+      stakedBalance[msg.sender] = stakedBalance[msg.sender].add(amount);
+    }
 
+    // Resume staking for KNV reward
 		super.stake(amount);
 	}
 
 	function palletteEarned(address account) public view returns (uint256) {
 		return pallettes[account].add(
-      block.timestamp.sub(palletteLastUpdateTime[account]).mul(1 ether).div(86400).mul(_balances[account].div(1 ether))
+      block.timestamp.sub(palletteLastUpdateTime[account])
+      .mul(1 ether)
+      .div(86400)
+      .mul(
+        stakedBalance[account]
+        .div(1 ether)
+      )
     );
 	}
 }
