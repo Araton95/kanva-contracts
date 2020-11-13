@@ -6,7 +6,7 @@ const KanvaLtd = artifacts.require('KanvaLtd')
 // Allocation values from whitepaper
 // Addresses should be changed to Mainnet addresses
 const liquidityTokens = {
-  KnvEth: { address: '0x323dbc822407899eed2480bfa5b060d60523bd70', allocation: '435600000000' },
+  KnvEth: { address: '0x3399ce58b2cf10a21cbd362541ba2339470b2464', allocation: '435600000000' },
   UsdcEth: { address: '0xbc30AaA8e99d0f0e435FC938034850c2fC77f753', allocation: '64800000000' },
   UsdtEth: { address: '0x230c4C6De893F369920a94Bd354589EA1A8BcAfD', allocation: '64800000000' },
   DaiEth: { address: '0xE8c6d3d1612cfD65e3D8fcAB3bA90D100029a79C', allocation: '64800000000' },
@@ -18,9 +18,9 @@ const liquidityTokens = {
 const genesisTimeblock = (secondsBeforeStart) => Math.round((new Date()).getTime() / 1000) + secondsBeforeStart
 
 module.exports = (deployer, network, accounts) => {
-  const kanvaLtdAddress = '0xbF5430B42043cfe4892B9eF43B5d79614352799d'
-  const kanvaTokenAddress = '0x9e8B9dE294fB21959831F0bA41A5cB121d66971c'
-  const stakingFactoryAddress = '0xf9f0E0B24267F4Dd90950E791e5118CA4a59E8fB'
+  const kanvaLtdAddress = '0x68Db707d49F2737b32a507d4e28B9d1b31aC75E0'
+  const kanvaTokenAddress = '0x376F52ab03014e0D300A816a6FABD7789e4D8E83'
+  const stakingFactoryAddress = '0x2d3098BE41dA77ef3255fEA1b71592ECfB84B95C'
 
   // Owner of contracts
   // Receiver of KNV tokens (should be un commented later)
