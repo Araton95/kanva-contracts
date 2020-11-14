@@ -14,7 +14,6 @@ contract PaletteRewards is StakingRewards, Ownable {
 
 	mapping(uint256 => uint256) public cards;
 	mapping(address => uint256) public pallettes;
-  mapping(address => uint256) public stakedBalance;
 	mapping(address => uint256) public palletteLastUpdateTime;
 
 	event CardAdded(uint256 card, uint256 points);
@@ -22,7 +21,7 @@ contract PaletteRewards is StakingRewards, Ownable {
 
 	modifier updatePalletteReward(address account) {
 		if (account != address(0)) {
-			pallettes[account] = earned(account);
+			pallettes[account] = palletteEarned(account);
 			palletteLastUpdateTime[account] = block.timestamp;
 		}
 		_;
@@ -54,25 +53,21 @@ contract PaletteRewards is StakingRewards, Ownable {
 		emit Redeemed(_msgSender(), cards[card]);
 	}
 
-	function stake(uint256 amount) public updatePalletteReward(msg.sender) {
-    // Stake for PLTE reward
-    if (amount >= MIN_STAKE && amount.add(stakedBalance[msg.sender]) <= MAX_STAKE) {
-      stakedBalance[msg.sender] = stakedBalance[msg.sender].add(amount);
+	function palletteEarned(address account) public view returns (uint256) {
+    uint256 paletteStaked = 0;
+
+    if (_balances[account] >= MAX_STAKE) {
+      paletteStaked = MAX_STAKE;
+    } else if (_balances[account] >= MIN_STAKE) {
+      paletteStaked = _balances[account];
     }
 
-    // Resume staking for KNV reward
-		super.stake(amount);
-	}
-
-	function palletteEarned(address account) public view returns (uint256) {
 		return pallettes[account].add(
-      block.timestamp.sub(palletteLastUpdateTime[account])
+      block.timestamp
+      .sub(palletteLastUpdateTime[account])
       .mul(1 ether)
       .div(86400)
-      .mul(
-        stakedBalance[account]
-        .div(1 ether)
-      )
+      .mul(paletteStaked.div(1 ether))
     );
 	}
 }
