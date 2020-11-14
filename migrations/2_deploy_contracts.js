@@ -18,9 +18,9 @@ const liquidityTokens = {
 const genesisTimeblock = (secondsBeforeStart) => Math.round((new Date()).getTime() / 1000) + secondsBeforeStart
 
 module.exports = (deployer, network, accounts) => {
-  const kanvaLtdAddress = '0x68Db707d49F2737b32a507d4e28B9d1b31aC75E0'
-  const kanvaTokenAddress = '0x376F52ab03014e0D300A816a6FABD7789e4D8E83'
-  const stakingFactoryAddress = '0x2d3098BE41dA77ef3255fEA1b71592ECfB84B95C'
+  const kanvaLtdAddress = '0x89320e8f1ABc37b53b7e34C03B1f1dc005afe687'
+  const kanvaTokenAddress = '0x5Eb80a96f9D492F2b6ac853FCA237923bfc27dC5'
+  const stakingFactoryAddress = '0xacA26556981903cAd6749A00084871eAE2c525eE'
 
   // Owner of contracts
   // Receiver of KNV tokens (should be un commented later)

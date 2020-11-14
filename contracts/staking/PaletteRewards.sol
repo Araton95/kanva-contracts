@@ -42,6 +42,11 @@ contract PaletteRewards is StakingRewards, Ownable {
 		emit CardAdded(cardId, amount);
 	}
 
+  // Stake updates the plte last update time
+	function stake(uint256 amount) public updatePalletteReward(msg.sender) {
+		super.stake(amount);
+	}
+
 	function redeem(uint256 card) public updatePalletteReward(msg.sender) {
 		require(cards[card] != 0, "redeem: Card not found!");
 		require(pallettes[_msgSender()] >= cards[card], "redeem: Not enough points to redeem for card!");
